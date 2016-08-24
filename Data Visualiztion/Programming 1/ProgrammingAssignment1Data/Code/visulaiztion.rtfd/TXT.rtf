@@ -1,0 +1,144 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AppleSymbols;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww26200\viewh12660\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \
+
+\b\fs36 Introduction
+\b0 \
+This submission looks at the global warming trend by plotting various temperature measurements at various sensors across the globe.  Many insights can be gathered through the data, however we will constrain ourselves to only a few graphs to show the global warming trend. The data was accessed from the GISS website[1]. The FAQ regarding the data can be found at [2]\
+\
+
+\b Data Cleaning
+\b0 \
+The data is for all the years from 1880 to 2014 for each month of the year. The average over the 30-year period from 1951-1980 was defined as the baseline and the rest of the measurements are recorded as anomalies from this baseline. If X is the temperature anomaly recorded for a given month and year, the procedure to get the actual recorded temperature is: (14 + X/100) 
+\f1 \uc0\u8728 
+\f0 C,  where 14 is the baseline average discussed earlier. All the analysis was down using R. The final year (2015) was dropped because of missing data. We used data provided as a CSV file under a .zip file from the course website. This data is a subset of the data found on the GISS website but is enough for us to do the analyses below.\
+\
+After generating all the recorded temperatures for each month and year, the maximum, the minimum and the median for year were calculated and plotted( GRAPH 1 below.) All have shown a gradual increase of just less than 1 C over the time period. A lowess[3] smoothing line was fitted to the data to show the general trend in the data. The trend lines clearly show that summers are getting hotter and the winters are getting less cold. 
+\b That all three trend lines are trending up means its a universal phenomenon and not seasonal (which should depend on other factors such as earth's orbit around sun etc)
+\b0 \
+\
+
+\fs24 \
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 {{\NeXTGraphic Screen Shot 2015-07-30 at 11.54.18 AM.png \width24660 \height16660
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc
+
+\b\fs36 \cf0 GRAPH1
+\b0\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\
+
+\fs28 \page \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+\fs36 \
+The data can be further analyzed at the hemispherical level (GRAPH 2, below.) Again we see that this is a phenomenon affecting both the hemispheres.  Since the data show a lot of temporal variation over short time periods, we again add lowess smoothing to the data and see a general increase in temperatures over the time period of study.\
+\
+
+\fs24 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 {{\NeXTGraphic Screen Shot 2015-07-30 at 12.02.08 PM.png \width24760 \height16920
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc
+
+\b\fs36 \cf0 GRAPH2
+\b0\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\
+\
+
+\fs28 \page 
+\fs36 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+Finally comparing each hemispherical temperatures to the global temperatures we can see a pattern independent of the general global warming trend. It seems over a period that lasts roughly 40 years one of the hemisphere is warmer than the other, and the globe as a whole. Note that this difference is relative and was/is prevalent even when the globe was cooler previously or is warmer now. It is an interesting phenomenon that doesn't get much attention otherwise.\
+\
+
+\fs24 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 {{\NeXTGraphic Screen Shot 2015-07-30 at 12.11.47 PM.png \width24720 \height16820
+}¬}\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\fs36 \cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\
+\
+[1] {\field{\*\fldinst{HYPERLINK "http://data.giss.nasa.gov/gistemp/"}}{\fldrslt http://data.giss.nasa.gov/gistemp/}}, accessed Jul/30/2015\
+[2] {\field{\*\fldinst{HYPERLINK "http://data.giss.nasa.gov/gistemp/FAQ.html"}}{\fldrslt http://data.giss.nasa.gov/gistemp/FAQ.html}}{\field{\*\fldinst{HYPERLINK "http://data.giss.nasa.gov/gistemp/"}}{\fldrslt /}}, accessed Jul/30/2015\
+[3] Lowess, Smoothing, {\field{\*\fldinst{HYPERLINK "https://en.wikipedia.org/wiki/Local_regression"}}{\fldrslt https://en.wikipedia.org/wiki/Local_regression}}, accessed Jul/30/2015}

@@ -1,0 +1,464 @@
+load(url("http://dl.dropboxusercontent.com/u/47814734/olive.rda"))#
+head(olive)
+modFit <- train(Area ~. , method="rpart",data=olive)
+newdata = as.data.frame(t(colMeans(olive)))#
+predict(modFit,newdata)
+olive
+library(ElemStatLearn)#
+data(SAheart)#
+set.seed(8484)#
+train = sample(1:dim(SAheart)[1],size=dim(SAheart)[1]/2,replace=F)#
+trainSA = SAheart[train,]#
+testSA = SAheart[-train,]#
+set.seed(13234)
+head(trainSA)
+modFit <- train(chd ~ c(age,alcohol,obesity,tobacco,typea, ldl) , method="glm",data=trainSA)
+modFit <- train(chd ~ (age,alcohol,obesity,tobacco,typea, ldl) , method="glm",data=trainSA)
+modFit <- train(chd ~ age+alcohol+obesity+tobacco+typea+ldl , method="glm",data=trainSA)
+?predict
+prediction <- predict(modFit,newdata=testSA)
+missClass = function(values,prediction){sum(((prediction > 0.5)*1) != values)/length(values)}
+missClass
+trainSA[,"chd"]
+prediction_test <- predict(modFit,newdata=testSA)#
+prediction_train <- predict(modFit,newdata=trainSA)#
+#
+missClass(trainSA[,"chd"],prediction_train)#
+missClass(testSA[,"chd"],prediction_test)
+library(ElemStatLearn)#
+data(vowel.train)#
+data(vowel.test)
+head(vowel.test)
+str(vowel.train)
+as.factor(vowel.train$y)
+?type
+vowel.train$y <- as.factor(vowel.train$y)
+str(vowel.train)
+set.seed(33833)#
+vowel.train$y <- as.factor(vowel.train$y)#
+vowel.test$y <- as.factor(vowel.test$y)#
+modFit <- train(y ~ ., method=rf, data=vowel.train)
+head(vowel.train)
+str(vowel.train)
+str(vowel.test)
+modFit <- train(y ~ ., method="rf", data=vowel.train)
+?varimp
+??varimp
+varImp(modFit)
+modFit <- train(y ~ ., method="rf", data=vowel.test)
+varImp(modFit)
+?randomForest
+modFit <- randomForest(y ~ .,  data=vowel.train)
+varImp(modFit)
+modFit <- train(y ~ ., method="rf", data=vowel.train)
+library(ElemStatLearn)#
+data(vowel.train)#
+data(vowel.test)
+library(caret)
+head(vowel.train)
+set.seed(33833)
+mod_rf <- train(y~., method="rf",data=vowel.train)
+mod_gbm <- train(y~., method="gbm",data=vowel.train)
+predict(mod_rf,vowel.test)
+predict_rf <- predict(mod_rf,vowel.test)
+predict_gbm <- predict(mod_gbm,vowel.test)
+confusionMatrix(predict_rf,vowel.test$y)
+vowel.train$y
+vowel.train$y <- as.factor(vowel.train$y)
+str(vowel.train)
+library(ElemStatLearn)#
+data(vowel.train)#
+data(vowel.test) #
+vowel.train$y <- as.factor(vowel.train$y)#
+vowel.test$y <- as.factor(vowel.test$y)#
+mod_rf <- train(y~., method="rf",data=vowel.train)#
+mod_gbm <- train(y~., method="gbm",data=vowel.train)#
+predict_rf <- predict(mod_rf,vowel.test)#
+predict_gbm <- predict(mod_gbm,vowel.test)
+confusionMatrix(predict_rf,vowel.test$y)
+confusionMatrix(predict_gbm,vowel.test$y)
+library(ElemStatLearn)#
+data(vowel.train)#
+data(vowel.test) #
+set.seed(33833)#
+vowel.train$y <- as.factor(vowel.train$y)#
+vowel.test$y <- as.factor(vowel.test$y)#
+mod_rf <- train(y~., method="rf",data=vowel.train)#
+mod_gbm <- train(y~., method="gbm",data=vowel.train)#
+predict_rf <- predict(mod_rf,vowel.test)#
+predict_gbm <- predict(mod_gbm,vowel.test)#
+confusionMatrix(predict_rf,vowel.test$y)#
+confusionMatrix(predict_gbm,vowel.test$y)
+predict_gbm == predict_rf
+predict_gbm[predict_gbm == predict_rf,]
+predict_gbm[predict_gbm == predict_rf]
+confusionMarix(predict_gbm[predict_gbm == predict_rf],vowel.test$y[predict_gbm == predict_rf])
+confusionMatrix(predict_gbm[predict_gbm == predict_rf],vowel.test$y[predict_gbm == predict_rf])
+set.seed(3433)#
+library(AppliedPredictiveModeling)#
+data(AlzheimerDisease)#
+adData = data.frame(diagnosis,predictors)#
+inTrain = createDataPartition(adData$diagnosis, p = 3/4)[[1]]#
+training = adData[ inTrain,]#
+testing = adData[-inTrain,]
+head(training)
+m = [0.5 0.5 0, 0.5 0 0.5]
+m = "0.5, 0.5 0; 0.5 0 0.5"
+m
+?matrix
+m = matrix(nrow = 3, ncol = 3)
+m
+m[,1] = "0.5 0.5 0"
+m
+m[,1] = [0.5 0.5 0]
+m[,1] = {0.5 0.5 0}
+m[,1] = c(0.5 0.5 0)
+m[,1] = c(0.5, 0.5, 0)
+m
+m[,2] = c(0.5, 0, 0.5)
+m[,3] = c(0, 1, 0)
+m
+str(m)
+as.numeric(m)
+m
+as.matrix(m)
+m*1
+as.numeric(m)*1
+as.matrix(as.numeric(m)*1)
+str(m)
+summary(m)
+sum(m)
+m <- c(0.5, 0.5, 0, 0.5, 0, 0.5, 0, 1, 0)
+dim(m) <- c(3,3)
+m
+r <- c(.33, 0.33, 0.33)
+r
+m*r
+?matrix product
+m%*%r
+?for
+each
+? while
+k
+??for
+?
+for (i=0;i < 10; i++)
+??
+?
+y
+i = 0;
+while (i < 10) {}
+History
+h
+history
+m <- c(0.5, 0.5, 0, 0.5, 0, 0.5, 0, 1, 0)#
+dim(m) <- c(3,3)
+r <- c(.33, 0.33, 0.33)
+i = 0;#
+while (i < 10) {
+r = m%*%r
+i = i + 1
+r
+}
+r
+i
+i = 0
+while (i < 100) {
+r = m%*%r
+i = i +1
+}
+r
+i = 0
+while (i < 1000) {
+r = m%*%r
+i = i +1
+}
+r
+m <- c(0.5, 0.5, 0, 0.5, 0, 0.5, 0, 0, 1)#
+dim(m) <- c(3,3)
+i = 0
+while (i < 1000) {
+r = m%*%r
+i = i +1
+}
+r
+m <- c(0.5, 0.5, 0, 0.5, 0, 0.5, 0, 0, 0)#
+dim(m) <- c(3,3)
+i = 0
+while (i < 1000) {
+r = m%*%r
+i = i +1
+}
+r
+m
+m <- c(0, 0.5, 0.5, 0, 0, 1, 0, 0, 1)
+dim(m) <- c(3,3)
+m
+h = matrix(0.3333,3,3)
+h
+a = 0.7*m +0.3h
+a = 0.7*m +0.3*h
+a
+r = c(0.333, 0.333, 0.333)
+r
+i = 0
+while (i < 1000) {#
+r = a%*%r
+i = i+1
+}
+r
+m
+i = 0
+while (i < 1000) {
+i= i +1
+}
+r = c(0.333, 0.333, 0.333)
+while (i < 1000) {
+i = i + 1
+r = m%*%r
+r = 0.7r
+r = 0.7*r
+}
+sum(r)
+(3-sum(r))/3
+m <- c(0, 0.5, 0.5, 0, 0, 1, 0, 0, 1)#
+dim(m) <- c(3,3)#
+r = c(0.333, 0.333, 0.333)#
+i = 0#
+while (i < 1000) {#
+i= i +1#
+r = m%*%r#
+r = 0.7*r#
+r = r + (3-sum(r))/3#
+}
+r
+m <- c(0, 0.5, 0.5, 0, 0, 1, 0, 0, 1)#
+dim(m) <- c(3,3)#
+r = c(1, 1, 1)#
+i = 0#
+while (i < 1000) {#
+i= i +1#
+r = m%*%r#
+r = 0.7*r#
+r = r + (3-sum(r))/3#
+}
+r
+m <- c(0, 0.5, 0.5, 0, 0, 1, 0, 0, 1)#
+dim(m) <- c(3,3)#
+r = c(1, 1, 1)#
+i = 0#
+while (i < 1000) {#
+i= i +1#
+r = m%*%r#
+r = 0.7*r#
+r = r + (1-sum(r))/3#
+}
+r
+m <- c(0, 0.5, 0.5, 0, 0, 1, 1, 0, 0)#
+dim(m) <- c(3,3)#
+r = c(1, 1, 1)#
+r = m%*%r
+r
+r = m%*%r
+r
+r = m%*%r
+r
+r = m%*%r
+r
+r = m%*%r
+r
+m <- c(0, 0.5, 0.5, 0, 0, 1, 0, 0, 1)#
+dim(m) <- c(3,3)#
+r = c(1, 1, 1)#
+i = 0#
+while (i < 1000) {#
+i= i +1#
+r = m%*%r#
+r = 0.7*r#
+r = r + 3*(1-sum(r))/3#
+}
+r
+m <- c(0, 0.5, 0.5, 0, 0, 1, 0, 0, 1)#
+dim(m) <- c(3,3)#
+r = c(1, 1, 1)#
+i = 0#
+while (i < 1000) {#
+i= i +1#
+r = m%*%r#
+r = 0.7*r#
+#r = r + (3-sum(r))/3#
+r = r + 0.3#
+}
+r
+m <- c(0, 0.5, 0.5, 0, 0, 1, 1, 0, 0)#
+dim(m) <- c(3,3)#
+h <- matrix(0.333, 3, 3)
+m
+h
+0.85*m+0.15*h
+m <- c(0, 0.5, 0.5, 0, 0, 1, 1, 0, 0)#
+dim(m) <- c(3,3)#
+r0 = c(1, 1, 1)#
+r1 = m%*%r0#
+r2 = m%*%r1#
+r3 = m%*%r2#
+r4 = m%*%r3#
+r5 = m%*%r4
+r4
+r5
+m <- c(0, 0.5, 0.5, 0, 0, 1, 0, 0, 1)#
+dim(m) <- c(3,3)#
+r = c(1, 1, 1)#
+i = 0#
+while (i < 1000) {#
+i= i +1#
+r = m%*%r#
+r = 0.7*r#
+#r = r + (3-sum(r))/3#
+r = r + 0.3#
+}
+r
+theData <- c(1,2,3,4)
+mat <- matrix(theData)
+mat
+mat <- matrix(theData,2,2)
+mat
+theData <- c(2,-1,-1,0,0,0,-1,3,0,-1,0,-1,-1,0,2,-1,0,0,0,-1,-1,3,-1,0,0,0,0,-1,2,-1,0,-1,0,0,-1,2)
+mat <- matrix(theData,6,6)
+mat
+?svd
+?eigen
+eigen(mat)
+a <- eigen(mat)
+a$vectors[5]
+a$vectors
+a$vectors[,5]
+mean(a$vectors[,5])
+fifth <- a$vectors[,5]
+fifth
+fifth - mean(a$vectors[,5])
+mean(a$vectors[,5])
+fifth .- mean(a$vectors[,5])
+mean_vec <- rep(mean(a$vectors[,5]), times = 6)
+mean_vec
+fifth - mean_vec
+theData <- matrix(c(1,1,2,2,3,4), byrow = true)
+theData <- matrix(c(1,1,2,2,3,4), byrow = TRUE)
+theData
+theData <- matrix(c(1,1,2,2,3,4), byrow = TRUE, nrow = 3, ncol = 2)
+a <- matrix(c(1,1,2,2,3,4), byrow = TRUE, nrow = 3, ncol = 2)
+a
+a'
+;
+m
+*
+p
+""
+''
+a
+transpose(a)
+t(a)
+t(a)%*%a
+setwd("/Users/sarpotd/Desktop/Courses/Coursera/Data Analysis/Data Mining/Data Visualiztion/Programming 1/ProgrammingAssignment1Data/Data/")#
+#
+## tempData1#
+rawtempData <- read.csv("ExcelFormattedGISTEMPDataCSV.csv", as.is=TRUE)#
+rownames(rawtempData) <- rawtempData[,1]#
+rawtempData <-rawtempData[,2:ncol(rawtempData)]#
+tempData <- apply(rawtempData[1:nrow(rawtempData)-1,2:13], 1, as.integer)#
+rownames(tempData) <- colnames(rawtempData)[1:12]#
+abstempData <- (tempData/100)+14#
+medianTemp <- apply(abstempData,2,median)#
+maxTemp <- apply(abstempData,2,max)#
+minTemp <- apply(abstempData,2,min)#
+year <- colnames(tempData)#
+plot.window(xlim=c(0,100),ylim=c(0,100))#
+par(pch=20)#
+plot(c(13.5,15), x=c(1880,2015), ylab="Temp", xlab="Year", main="Plot of Temperatures Max, Median, Min for each year(1880-2014)")#
+points(medianTemp, x=year, col="black")#
+points(maxTemp, x=year, col="red")#
+points(minTemp, x=year, col="blue")#
+lines(lowess(maxTemp, x=year), col="red")#
+lines(lowess(medianTemp, x=year), col="black")#
+lines(lowess(minTemp, x=year), col="blue")#
+legend(x=1980, y=13.75, c("MaxTemp", "MedianTemp", "MinTemp"), lty=c(1,1,1), lwd=c(2.5,2.5,2.5), col=c("red","black","blue"))
+setwd("/Users/sarpotd/Desktop/Courses/Coursera/Data Analysis/Data Mining/Data Visualiztion/Programming 1/ProgrammingAssignment1Data/Data/")#
+#
+## tempData1#
+rawtempData <- read.csv("ExcelFormattedGISTEMPDataCSV.csv", as.is=TRUE)#
+rownames(rawtempData) <- rawtempData[,1]#
+rawtempData <-rawtempData[,2:ncol(rawtempData)]#
+tempData <- apply(rawtempData[1:nrow(rawtempData)-1,2:13], 1, as.integer)#
+rownames(tempData) <- colnames(rawtempData)[1:12]#
+abstempData <- (tempData/100)+14#
+medianTemp <- apply(abstempData,2,median)#
+maxTemp <- apply(abstempData,2,max)#
+minTemp <- apply(abstempData,2,min)#
+year <- colnames(tempData)#
+plot.window(xlim=c(0,100),ylim=c(0,100))#
+par(pch=20)#
+plot(c(13.5,15), x=c(1880,2015), ylab="Temp(∘C)", xlab="Year", main="Plot of Temperatures Max, Median, Min for each year(1880-2014)")#
+points(medianTemp, x=year, col="black")#
+points(maxTemp, x=year, col="red")#
+points(minTemp, x=year, col="blue")#
+lines(lowess(maxTemp, x=year), col="red")#
+lines(lowess(medianTemp, x=year), col="black")#
+lines(lowess(minTemp, x=year), col="blue")#
+legend(x=1980, y=13.75, c("MaxTemp", "MedianTemp", "MinTemp"), lty=c(1,1,1), lwd=c(2.5,2.5,2.5), col=c("red","black","blue"))
+setwd("/Users/sarpotd/Desktop/Courses/Coursera/Data Analysis/Data Mining/Data Visualiztion/Programming 1/ProgrammingAssignment1Data/Data/")#
+#
+## tempData1#
+rawtempData <- read.csv("ExcelFormattedGISTEMPDataCSV.csv", as.is=TRUE)#
+rownames(rawtempData) <- rawtempData[,1]#
+rawtempData <-rawtempData[,2:ncol(rawtempData)]#
+tempData <- apply(rawtempData[1:nrow(rawtempData)-1,2:13], 1, as.integer)#
+rownames(tempData) <- colnames(rawtempData)[1:12]#
+abstempData <- (tempData/100)+14#
+medianTemp <- apply(abstempData,2,median)#
+maxTemp <- apply(abstempData,2,max)#
+minTemp <- apply(abstempData,2,min)#
+year <- colnames(tempData)#
+plot.window(xlim=c(0,100),ylim=c(0,100))#
+par(pch=20)#
+plot(c(13.5,15), x=c(1880,2015), ylab="Temp(C)", xlab="Year", main="Plot of Temperatures Max, Median, Min for each year(1880-2014)")#
+points(medianTemp, x=year, col="black")#
+points(maxTemp, x=year, col="red")#
+points(minTemp, x=year, col="blue")#
+lines(lowess(maxTemp, x=year), col="red")#
+lines(lowess(medianTemp, x=year), col="black")#
+lines(lowess(minTemp, x=year), col="blue")#
+legend(x=1980, y=13.75, c("MaxTemp", "MedianTemp", "MinTemp"), lty=c(1,1,1), lwd=c(2.5,2.5,2.5), col=c("red","black","blue"))
+plot.window(xlim=c(0,100),ylim=c(0,100))#
+par(pch=20)#
+plot(c(13.5,15), x=c(1880,2015), ylab="Temp(C)", xlab="Year", main="Plot of Temperatures Max, Median, Min for each year and Lowess Smoothing(1880-2014)")#
+points(medianTemp, x=year, col="black")#
+points(maxTemp, x=year, col="red")#
+points(minTemp, x=year, col="blue")#
+lines(lowess(maxTemp, x=year), col="red")#
+lines(lowess(medianTemp, x=year), col="black")#
+lines(lowess(minTemp, x=year), col="blue")#
+legend(x=1980, y=13.75, c("MaxTemp", "MedianTemp", "MinTemp"), lty=c(1,1,1), lwd=c(2.5,2.5,2.5), col=c("red","black","blue"))
+rawtempData2 <- read.csv("ExcelFormattedGISTEMPData2CSV.csv", as.is=TRUE)#
+rownames(rawtempData2) <- rawtempData2[,1]#
+rawtempData2 <-rawtempData2[,2:ncol(rawtempData2)]#
+tempData2 <- apply(rawtempData2[1:nrow(rawtempData2)-1,1:3], 1, as.integer)#
+year <- colnames(tempData2)#
+rownames(tempData2) <- colnames(rawtempData2)[1:3]#
+abstempData2 <- (tempData2/100)+14#
+plot(c(13.5,15), x=c(1880,2015), ylab="Temp(C)", xlab="Year", main="Plot of Temperatures of NHemi, SHemi, Global (and Lowess smoothing)")#
+lines(abstempData2[1,], x=year, col="red")#
+lines(abstempData2[2,], x=year, col="blue")#
+lines(abstempData2[3,], x=year, col="black")#
+lines(lowess(abstempData2[1,], x=year), col="red", lwd=3.5)#
+lines(lowess(abstempData2[2,], x=year), col="blue", lwd=3.5)#
+lines(lowess(abstempData2[3,], x=year), col="black", lwd=3.5)#
+legend(x=1980, y=13.75, c("Global", "NHem", "SHem"), lty=c(1,1,1), lwd=c(2.5,2.5,2.5), col=c("red","blue","black"))
+year <- colnames(tempData2)#
+nHemiG = abstempData2[2,] - abstempData2[1,]#
+sHemiG = abstempData2[3,] - abstempData2[1,]#
+gG = abstempData2[1,] - abstempData2[1,]#
+plot(c(-0.2,0.2), x=c(1880,2015), ylab="Temp(C)", xlab="Year", main="Temperature Cycles between NHemi and SHemi Vs Global")#
+lines(nHemiG, x=year, col="red")#
+lines(sHemiG, x=year, col="blue")#
+lines(gG, x=year, col="black")#
+legend(x=1960, y=-0.15, c("nHemi-Global", "sHemi-Global", "Global"), lty=c(1,1,1), lwd=c(2.5,2.5,2.5), col=c("red","blue","black"))
